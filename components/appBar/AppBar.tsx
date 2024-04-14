@@ -47,7 +47,7 @@ function ResponsiveAppBar() {
 						variant="h6"
 						noWrap
 						component="a"
-						href="#app-bar-with-responsive-menu"
+						href="/"
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },
@@ -117,8 +117,15 @@ function ResponsiveAppBar() {
 						COUNTRIES
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
-						<Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-							<Badge badgeContent={4} color="secondary" sx={{ top: 10 }}>
+						<Button onClick={handleCloseNavMenu} href="/" sx={{ my: 2, color: "white", display: "block" }}>
+							Home
+						</Button>
+						<Button
+							onClick={handleCloseNavMenu}
+							href="/favorites"
+							sx={{ my: 2, color: "white", display: "block" }}
+						>
+							<Badge badgeContent={4} color="secondary">
 								Favorites
 							</Badge>
 						</Button>
