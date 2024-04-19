@@ -24,7 +24,5 @@ export default function Home() {
 		return null;
 	}
 
-	console.log(country);
-
 	return <div className="flex justify-center p-20">{country && <ActionAreaCard country={country} />}</div>;
 }

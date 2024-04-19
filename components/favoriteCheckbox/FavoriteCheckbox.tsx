@@ -2,13 +2,17 @@ import * as React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "@/store/favorites/favorites.slice";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-export default function FavoriteCheckbox() {
+export default function FavoriteCheckbox({ country, hasCountry }) {
+	const dispatch = useDispatch();
+
 	return (
-		<div className="flex justify-end">
-			<Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-		</div>
+		<button onClick={() => dispatch(actions.toggleFavorites(country))}>
+			<Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} checked={hasCountry} />
+		</button>
 	);
 }
