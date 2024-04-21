@@ -1,12 +1,13 @@
 "use client";
 
-import MultiActionAreaCard, { ICountryData } from "@/components/card/Card";
+import MultiActionAreaCard from "@/components/card/Card";
 import { DataNotFound } from "@/components/dataNotFound/DataNotFound";
 import ResponsiveGrid from "@/components/grid/Grid";
+import { ICountryData, RootState } from "@/types";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-	const { favorites } = useSelector((state) => state);
+	const { favorites } = useSelector((state: RootState) => state);
 
 	return (
 		<>

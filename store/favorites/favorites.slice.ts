@@ -1,6 +1,7 @@
+import { ICountryData } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState: Array<ICountryData> = [];
 
 export const favoritesSlice = createSlice({
 	name: "favorites",

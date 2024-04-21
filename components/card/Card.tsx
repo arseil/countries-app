@@ -7,23 +7,12 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import FavoriteCheckbox from "../favoriteCheckbox/FavoriteCheckbox";
 import { useSelector } from "react-redux";
-
-export interface ICountryData {
-	name: {
-		official: string;
-		common: string;
-	};
-	capital: string;
-	population: number;
-	flags: {
-		svg: string;
-	};
-}
+import { ICountryData, RootState } from "@/types";
 
 export default function MultiActionAreaCard(props: { country: ICountryData }) {
 	const { country } = props;
 	const name = country?.name.common.toLowerCase();
-	const { favorites } = useSelector((state) => state);
+	const { favorites } = useSelector((state: RootState) => state);
 	const hasCountry = favorites.some((favorite) => favorite?.population === country?.population);
 
 	return (

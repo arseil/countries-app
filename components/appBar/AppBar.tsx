@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ExploreIcon from "@mui/icons-material/Explore";
 import { Badge } from "@mui/material";
 import { useSelector } from "react-redux";
+import { RootState } from "@/types";
 
 const pages = ["Home", "Favorites"];
 
@@ -28,7 +29,7 @@ function ResponsiveAppBar() {
 		setAnchorElNav(null);
 	};
 
-	const { favorites } = useSelector((state) => state);
+	const { favorites } = useSelector((state: RootState) => state);
 
 	return (
 		<AppBar position="static">

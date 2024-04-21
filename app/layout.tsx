@@ -1,5 +1,5 @@
 "use client";
-// import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ResponsiveAppBar from "@/components/appBar/AppBar";
@@ -8,11 +8,6 @@ import store, { persistor } from "@/store/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata: Metadata = {
-// 	title: "Countries",
-// 	description: "Countries App",
-// };
 
 export default function RootLayout({
 	children,

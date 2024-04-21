@@ -1,6 +1,7 @@
 import { getCountries } from "@/api/requests";
-import MultiActionAreaCard, { ICountryData } from "@/components/card/Card";
+import MultiActionAreaCard from "@/components/card/Card";
 import ResponsiveGrid from "@/components/grid/Grid";
+import { ICountryData } from "@/types";
 
 export default async function Home() {
 	const countries = await getCountries();

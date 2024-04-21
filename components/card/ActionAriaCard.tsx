@@ -5,12 +5,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import FavoriteCheckbox from "../favoriteCheckbox/FavoriteCheckbox";
-import { ICountryData } from "./Card";
 import { useSelector } from "react-redux";
+import { ICountryData, RootState } from "@/types";
 
 export default function ActionAreaCard({ country }: { country: ICountryData }) {
-	const { favorites } = useSelector((state) => state);
-	const hasCountry = favorites.some((favorite) => favorite?.population === country.population);
+	const { favorites } = useSelector((state: RootState) => state);
+	const hasCountry = favorites.some((favorite: ICountryData) => favorite?.population === country.population);
 
 	return (
 		<Card sx={{ maxWidth: "50%", px: 3, py: 1 }}>
