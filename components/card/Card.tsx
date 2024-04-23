@@ -9,6 +9,7 @@ import FavoriteCheckbox from "../favoriteCheckbox/FavoriteCheckbox";
 import { useSelector } from "react-redux";
 import { ICountryData, RootState } from "@/types";
 
+//TODO MAKE REUSUBLE COmponent
 export default function MultiActionAreaCard(props: { country: ICountryData }) {
 	const { country } = props;
 	const name = country?.name.common.toLowerCase();

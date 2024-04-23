@@ -15,10 +15,14 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import { Badge } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types";
+import Link from "next/link";
 
 const pages = ["Home", "Favorites"];
 
+//TODO move to layouts
+
 function ResponsiveAppBar() {
+	const { favorites } = useSelector((state: RootState) => state);
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -29,8 +33,8 @@ function ResponsiveAppBar() {
 		setAnchorElNav(null);
 	};
 
-	const { favorites } = useSelector((state: RootState) => state);
 
+	//TODO add next link
 	return (
 		<AppBar position="static">
 			<Container maxWidth="xl">
@@ -53,7 +57,7 @@ function ResponsiveAppBar() {
 					>
 						COUNTRIES
 					</Typography>
-
+						{/* //TODO: ADD separate component */}
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<IconButton
 							size="large"
@@ -94,7 +98,7 @@ function ResponsiveAppBar() {
 					<Typography
 						variant="h5"
 						noWrap
-						component="a"
+						component={Link}
 						href="#app-bar-with-responsive-menu"
 						sx={{
 							mr: 2,
@@ -109,6 +113,9 @@ function ResponsiveAppBar() {
 					>
 						COUNTRIES
 					</Typography>
+
+					{/* //TODO: make navigatin component  */}
+					{/* //TODO: make underline on current page */}
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
 						<Button onClick={handleCloseNavMenu} href="/" sx={{ my: 2, color: "white", display: "block" }}>
 							Home
@@ -118,7 +125,7 @@ function ResponsiveAppBar() {
 							href="/favorites"
 							sx={{ my: 2, color: "white", display: "block" }}
 						>
-							<Badge badgeContent={favorites.length - 1} color="secondary">
+							<Badge badgeContent={favorites.length || ""} color="secondary">
 								Favorites
 							</Badge>
 						</Button>

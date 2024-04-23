@@ -5,11 +5,24 @@ import ActionAreaCard from "@/components/card/ActionAriaCard";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-	const params = useParams();
+//TODO MAKE REQUEST ON SERVER
+
+interface HomeProps{
+	params: {
+		slug: string
+	}
+}
+
+//TODO add to props pagge { params }: HomeProps
+
+export default async function Home() {
+	const params = useParams()
 	const { slug } = params;
+	// const country = await getCountry(params.slug);
 
 	const [country, setCountry] = useState(null);
+
+	//TODO If country is empty add error handling
 
 	useEffect(() => {
 		const fetchCountry = async () => {

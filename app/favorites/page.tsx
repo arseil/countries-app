@@ -3,28 +3,28 @@
 import MultiActionAreaCard from "@/components/card/Card";
 import { DataNotFound } from "@/components/dataNotFound/DataNotFound";
 import ResponsiveGrid from "@/components/grid/Grid";
-import { ICountryData, RootState } from "@/types";
+import { ICountryData } from "@/types";
+import {RootState} from '@/store'
 import { useSelector } from "react-redux";
 
+
+//TODO: make server page and move this layout to coponents
 export default function Home() {
 	const { favorites } = useSelector((state: RootState) => state);
+	
+	if (!favorites.length) {
+		return <div className="flex justify-center items-center flex-col min-h-[90vh]">
+		<DataNotFound />
+	</div>
+	}
 
 	return (
 		<>
-			{favorites[0] === null && favorites.length === 1 && (
-				<div className="flex justify-center items-center flex-col min-h-[90vh]">
-					<DataNotFound />
-				</div>
-			)}
-			{favorites.length > 1 && (
 				<ResponsiveGrid>
-					{favorites.slice(0, 12).map((country: ICountryData, index: number) => {
-						if (country !== null) {
-							return <MultiActionAreaCard key={index} country={country} />;
-						}
+					{favorites.map((country: ICountryData) => {
+							return <MultiActionAreaCard key={country.population} country={country} />;
 					})}
 				</ResponsiveGrid>
-			)}
 		</>
 	);
 }

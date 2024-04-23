@@ -1,8 +1,11 @@
 import { ICountryData } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
+//TODO make as object with key favorites
 const initialState: Array<ICountryData> = [];
 
+
+//TODO: add two separates meethods remove and add
 export const favoritesSlice = createSlice({
 	name: "favorites",
 	initialState,
