@@ -10,20 +10,27 @@ import {
 	PURGE,
 	REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+
+import {storage} from "./storage";
+import { useDispatch } from "react-redux";
+
+const reducers = combineReducers({
+	favorites: favoriteReducer,
+});
+
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof reducers>
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+
 
 const persistConfig = {
 	key: "root",
 	storage,
 };
 
-const reducers = combineReducers({
-	favorites: favoriteReducer,
-});
-
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-const store = configureStore({
+export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
@@ -34,5 +41,3 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-export default store;

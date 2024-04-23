@@ -6,11 +6,14 @@ import { ICountryData } from "@/types";
 export default async function Home() {
 	const countries = await getCountries();
 
+	//TODO: handle errros
+				//TODO: move to separate components
+
 	return (
 		<>
 			<ResponsiveGrid>
-				{countries.slice(0, 12).map((country: ICountryData, index: number) => (
-					<MultiActionAreaCard key={index} country={country} />
+				{countries.slice(0, 24).map((country: ICountryData,) => (
+					<MultiActionAreaCard key={country.population} country={country} />
 				))}
 			</ResponsiveGrid>
 		</>

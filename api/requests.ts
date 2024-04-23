@@ -1,5 +1,8 @@
 import axios from "axios";
 
+//TODO move to env
+//TODO move functions to services
+//TODO add types to services
 const RESTCOUNTRIES_API_URL = "https://restcountries.com/v3.1";
 
 export const getCountries = async () => {

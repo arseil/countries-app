@@ -16,10 +16,22 @@ export default function FavoriteCheckbox({
 	hasCountry: boolean;
 }) {
 	const dispatch = useDispatch();
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const checked = e.target.checked;
+		if (checked) {
+			//TODO: removve favvorites
+		}else {
+			//TODO: add to favtites
+		}
+		console.log(e);
+		
+	}
 
+	//TODO remove button
+	
 	return (
 		<button onClick={() => dispatch(actions.toggleFavorites(country))}>
-			<Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} checked={hasCountry} />
+			<Checkbox {...label} onChange={handleChange} icon={<FavoriteBorder />} checkedIcon={<Favorite />} checked={hasCountry} />
 		</button>
 	);
 }
