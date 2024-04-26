@@ -1,1 +1,2 @@
-export {CountryService} from './counties'
+export { CountryService } from "./countries";
+export type { ICountryData } from "./countries";

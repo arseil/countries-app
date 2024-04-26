@@ -1,23 +1,28 @@
 "use client";
+
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import FavoriteCheckbox from "../favoriteCheckbox/FavoriteCheckbox";
+import { CardActionArea, SxProps } from "@mui/material";
+import FavoriteCheckbox from "../FavoriteCheckbox/FavoriteCheckbox";
 import { useSelector } from "react-redux";
-import { ICountryData, RootState } from "@/types";
+import { RootState } from "@/store";
+import { ICountryData } from "@/services";
 
-//TODO MAKE REUSUBLE COmponent
-export default function MultiActionAreaCard(props: { country: ICountryData }) {
-	const { country } = props;
+interface IMaterialCardProps {
+	sx: SxProps;
+	country: ICountryData;
+}
+
+export default function MaterialCard({ sx, country }: IMaterialCardProps) {
+	const favorites = useSelector((state: RootState) => state.favorites.favorites);
+	const hasCountry = favorites.some((favorite: ICountryData) => favorite?.population === country?.population);
 	const name = country?.name.common.toLowerCase();
-	const { favorites } = useSelector((state: RootState) => state);
-	const hasCountry = favorites.some((favorite) => favorite?.population === country?.population);
 
 	return (
-		<Card sx={{ py: 2, px: 2 }}>
+		<Card sx={sx}>
 			<FavoriteCheckbox country={country} hasCountry={hasCountry} />
 			<CardActionArea href={`/country/${name}`}>
 				<CardMedia component="img" height="140" image={`${country?.flags.svg}`} alt="green iguana" />

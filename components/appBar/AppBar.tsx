@@ -9,20 +9,19 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import ExploreIcon from "@mui/icons-material/Explore";
-import { Badge } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "@/types";
 import Link from "next/link";
+import { Navigation } from "../Navigation/Navigation";
+import { RootState } from "@/store";
 
 const pages = ["Home", "Favorites"];
 
 //TODO move to layouts
 
 function ResponsiveAppBar() {
-	const { favorites } = useSelector((state: RootState) => state);
+	const favorites = useSelector((state: RootState) => state.favorites.favorites);
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -33,7 +32,6 @@ function ResponsiveAppBar() {
 		setAnchorElNav(null);
 	};
 
-
 	//TODO add next link
 	return (
 		<AppBar position="static">
@@ -43,7 +41,7 @@ function ResponsiveAppBar() {
 					<Typography
 						variant="h6"
 						noWrap
-						component="a"
+						component={Link}
 						href="/"
 						sx={{
 							mr: 2,
@@ -57,7 +55,7 @@ function ResponsiveAppBar() {
 					>
 						COUNTRIES
 					</Typography>
-						{/* //TODO: ADD separate component */}
+					{/* //TODO: ADD separate component */}
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<IconButton
 							size="large"
@@ -116,50 +114,7 @@ function ResponsiveAppBar() {
 
 					{/* //TODO: make navigatin component  */}
 					{/* //TODO: make underline on current page */}
-					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
-						<Button onClick={handleCloseNavMenu} href="/" sx={{ my: 2, color: "white", display: "block" }}>
-							Home
-						</Button>
-						<Button
-							onClick={handleCloseNavMenu}
-							href="/favorites"
-							sx={{ my: 2, color: "white", display: "block" }}
-						>
-							<Badge badgeContent={favorites.length || ""} color="secondary">
-								Favorites
-							</Badge>
-						</Button>
-					</Box>
-
-					{/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+					<Navigation handleCloseNavMenu={handleCloseNavMenu} favoritesLength={favorites.length} />
 				</Toolbar>
 			</Container>
 		</AppBar>

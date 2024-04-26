@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { reducer as favoriteReducer } from "./favorites/favorites.slice";
+import { reducer as favoriteReducer } from "./favorites/favorites";
 import {
 	persistStore,
 	persistReducer,
@@ -11,17 +11,16 @@ import {
 	REGISTER,
 } from "redux-persist";
 
-import {storage} from "./storage";
+import { storage } from "./storage";
 import { useDispatch } from "react-redux";
 
 const reducers = combineReducers({
 	favorites: favoriteReducer,
 });
 
-export type AppDispatch = typeof store.dispatch
-export type RootState = ReturnType<typeof reducers>
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
-
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof reducers>;
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 
 const persistConfig = {
 	key: "root",

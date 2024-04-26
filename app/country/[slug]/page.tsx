@@ -1,41 +1,32 @@
-"use client";
-
-import { getCountry } from "@/api/requests";
-import ActionAreaCard from "@/components/card/ActionAriaCard";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import MaterialCard from "@/components/Card/MaterialCard";
+import { DataNotFound } from "@/components/DataNotFound/DataNotFound";
+import { CountryService } from "@/services";
 
 //TODO MAKE REQUEST ON SERVER
 
-interface HomeProps{
+interface HomeProps {
 	params: {
-		slug: string
-	}
+		slug: string;
+	};
 }
 
 //TODO add to props pagge { params }: HomeProps
 
-export default async function Home() {
-	const params = useParams()
+export default async function Home({ params }: HomeProps) {
 	const { slug } = params;
-	// const country = await getCountry(params.slug);
-
-	const [country, setCountry] = useState(null);
+	const country = await CountryService.getCountry(slug);
 
 	//TODO If country is empty add error handling
 
-	useEffect(() => {
-		const fetchCountry = async () => {
-			const result = await getCountry(slug as string);
-			setCountry(result[0]);
-		};
-
-		fetchCountry();
-	}, [slug]);
-
 	if (!country) {
-		return null;
+		return <DataNotFound />;
 	}
 
-	return <div className="flex justify-center p-20">{country && <ActionAreaCard country={country} />}</div>;
+	return (
+		<div className="flex justify-center p-20">
+			{country && (
+				<MaterialCard key={country.population} sx={{ maxWidth: "50%", px: 3, py: 1 }} country={country[0]} />
+			)}
+		</div>
+	);
 }
